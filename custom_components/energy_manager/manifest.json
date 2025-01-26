@@ -1,9 +1,8 @@
 {
-  "domain": "energy_manager",
-  "name": "Energy Manager",
-  "version": "0.1",
-  "documentation": "https://github.com/votre-repo/energy_manager",
-  "dependencies": [],
-  "codeowners": ["@votre-utilisateur"],
-  "requirements": []
+    "domain": "energy_manager",
+    "name": "Energy Manager",
+    "version": "1.0.0",
+    "requirements": [],
+    "codeowners": ["@foucteau"],
+    "documentation": "https://github.com/foucteau/energy_manager"
 }
