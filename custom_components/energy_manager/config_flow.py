@@ -1,5 +1,6 @@
 """Config flow for Energy Manager."""
 from homeassistant import config_entries
+import voluptuous as vol
 from homeassistant.core import callback
 from .const import DOMAIN
 
@@ -14,4 +15,10 @@ class EnergyManagerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             return self.async_create_entry(title="Energy Manager", data=user_input)
 
-        return self.async_show_form(step_id="user")
+        # Exemple d'un formulaire avec un champ de test
+        return self.async_show_form(
+            step_id="user",
+            data_schema=vol.Schema({
+                vol.Required("example_field", default="default_value"): str,
+            }),
+        )

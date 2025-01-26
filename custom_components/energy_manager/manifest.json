@@ -4,5 +4,6 @@
     "version": "1.0.0",
     "requirements": [],
     "codeowners": ["@foucteau"],
-    "documentation": "https://github.com/foucteau/energy_manager"
+    "documentation": "https://github.com/foucteau/energy_manager",
+    "config_flow": true
 }
