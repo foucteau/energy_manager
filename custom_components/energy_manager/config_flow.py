@@ -19,16 +19,15 @@ class EnergyManagerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema({
-                vol.Required("max_energy_threshold", default=3000): int,  # Seuil max (en watts)
-                vol.Required("energy_sensor", description="Capteur de consommation totale"):
-                    selector.EntitySelector({ "domain": "sensor" }),  # Capteur
+                vol.Required("max_energy_threshold", default=3000): int,  # Seuil max
+                vol.Required("energy_sensor"): selector.EntitySelector({"domain": "sensor"}),  # Capteur
             }),
         )
 
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        """Retourne le flux des options."""
+        """Return the options flow."""
         return EnergyManagerOptionsFlow(config_entry)
 
 class EnergyManagerOptionsFlow(config_entries.OptionsFlow):
@@ -43,12 +42,10 @@ class EnergyManagerOptionsFlow(config_entries.OptionsFlow):
         if user_input is not None:
             return self.async_create_entry(title="", data=user_input)
 
-        # Formulaire pour mettre à jour la configuration
+        # Formulaire pour gérer la liste des périphériques
         return self.async_show_form(
-            step_id="init",
+            step_id="device_list",
             data_schema=vol.Schema({
-                vol.Required("max_energy_threshold", default=self.config_entry.options.get("max_energy_threshold", 3000)): int,
-                vol.Required("energy_sensor", default=self.config_entry.options.get("energy_sensor", "")):
-                    selector.EntitySelector({ "domain": "sensor" }),
+                vol.Optional("device_list", default=self.config_entry.options.get("device_list", [])): list,
             }),
         )
